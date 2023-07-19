@@ -77,6 +77,7 @@ export default (processor: Processor): void => {
           } else {
             importedContent += content;
           }
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
           fs.access(nodeModulesPath, constants.F_OK, (error) => {
             if (error) {
