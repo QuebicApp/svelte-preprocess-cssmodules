@@ -38,7 +38,7 @@ let pluginOptions: PluginOptions;
  * @returns the preprocessor markup
  */
 const markup: MarkupPreprocessor = async ({ content, filename }) => {
-  const isIncluded = isFileIncluded(pluginOptions.includePaths, filename);
+  const isIncluded = filename && isFileIncluded(pluginOptions.includePaths, filename);
 
   if (!isIncluded || (!pluginOptions.parseStyleTag && !pluginOptions.parseExternalStylesheet)) {
     return { code: content };
@@ -53,9 +53,10 @@ const markup: MarkupPreprocessor = async ({ content, filename }) => {
   }
 
   if (
-    !pluginOptions.useAsDefaultScoping &&
-    !hasModuleAttribute(ast) &&
-    !hasModuleImports(content)
+    (!pluginOptions.useAsDefaultScoping &&
+      !hasModuleAttribute(ast) &&
+      !hasModuleImports(content)) ||
+    !ast.css
   ) {
     return { code: content };
   }
