@@ -1,5 +1,5 @@
 import { walk } from 'svelte/compiler';
-import type { Attribute, TemplateNode } from 'svelte/types/compiler/interfaces.d';
+import type { Attribute, TemplateNode } from 'svelte/types/compiler/interfaces';
 import type Processor from '../processors/processor';
 
 interface CssVariables {

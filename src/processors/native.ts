@@ -1,5 +1,5 @@
 import { walk } from 'svelte/compiler';
-import type { Ast, TemplateNode } from 'svelte/types/compiler/interfaces.d';
+import type { Ast, TemplateNode } from 'svelte/types/compiler/interfaces';
 import type { PluginOptions } from '../types';
 import Processor from './processor';
 
