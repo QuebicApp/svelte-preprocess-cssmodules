@@ -38,7 +38,7 @@ let pluginOptions: PluginOptions;
  * @returns the preprocessor markup
  */
 const markup: MarkupPreprocessor = async ({ content, filename }) => {
-  const isIncluded = isFileIncluded(pluginOptions.includePaths, filename);
+  const isIncluded = isFileIncluded(pluginOptions.includePaths, filename ?? '');
 
   if (!isIncluded || (!pluginOptions.parseStyleTag && !pluginOptions.parseExternalStylesheet)) {
     return { code: content };
@@ -64,8 +64,8 @@ const markup: MarkupPreprocessor = async ({ content, filename }) => {
   let { mode, hashSeeder } = pluginOptions;
 
   if (pluginOptions.parseStyleTag && hasModuleAttribute(ast)) {
-    const moduleAttribute = ast.css.attributes.find((item) => item.name === 'module');
-    mode = moduleAttribute.value !== true ? moduleAttribute.value[0].data : mode;
+    const moduleAttribute = ast.css?.attributes.find((item) => item.name === 'module');
+    mode = moduleAttribute?.value !== true ? moduleAttribute.value[0].data : mode;
   }
 
   if (!['native', 'mixed', 'scoped'].includes(mode)) {
@@ -84,15 +84,15 @@ const markup: MarkupPreprocessor = async ({ content, filename }) => {
 
   switch (mode) {
     case 'scoped': {
-      parsedContent = await scopedProcessor(ast, content, filename, pluginOptions);
+      parsedContent = await scopedProcessor(ast, content, filename ?? '', pluginOptions);
       break;
     }
     case 'mixed': {
-      parsedContent = await mixedProcessor(ast, content, filename, pluginOptions);
+      parsedContent = await mixedProcessor(ast, content, filename ?? '', pluginOptions);
       break;
     }
     default: {
-      parsedContent = await nativeProcessor(ast, content, filename, pluginOptions);
+      parsedContent = await nativeProcessor(ast, content, filename ?? '', pluginOptions);
       break;
     }
   }
