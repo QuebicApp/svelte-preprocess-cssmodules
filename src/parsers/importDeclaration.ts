@@ -4,13 +4,14 @@ import fs, { constants } from 'fs';
 import MagicString from 'magic-string';
 import { parse, walk } from 'svelte/compiler';
 import type { TemplateNode } from 'svelte/types/compiler/interfaces';
+import type { Node } from 'estree-walker';
 import type Processor from '../processors/processor';
 
 /**
  * Parse CssModules Imports
  */
 export default (processor: Processor): void => {
-  const ast = (processor.ast as unknown) as TemplateNode;
+  const ast = (processor.ast as unknown) as Node;
   const backup = {
     ast: processor.ast,
     magicContent: processor.magicContent,
