@@ -25,6 +25,7 @@ module.exports = {
       }
     ],
     'import/no-import-module-exports': "off",
+    "import/no-unresolved": "off",
     'lines-between-class-members': [
       'error',
       'always',
