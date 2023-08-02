@@ -77,10 +77,10 @@ export default (processor: Processor): void => {
           } else {
             importedContent += content;
           }
-        } catch (err: any) {
+        } catch (err: unknown) {
           fs.access(nodeModulesPath, constants.F_OK, (error) => {
             if (error) {
-              throw new Error(err); // not found in node_modules packages either, throw orignal error
+              throw new Error(err as string); // not found in node_modules packages either, throw orignal error
             }
           });
         }
