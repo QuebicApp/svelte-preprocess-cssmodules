@@ -1,5 +1,7 @@
-import { createHash } from 'crypto';
+import { createHash, type Hash } from 'crypto';
 import Big from 'big.js';
+
+type BinaryToTextEncoding = Parameters<Hash["digest"]>[0];
 
 const baseEncodeTables = {
   26: 'abcdefghijklmnopqrstuvwxyz',
@@ -77,7 +79,7 @@ const getHashDigest = (
       maxLength
     );
   }
-  const encoding = (digestType as 'latin1') || 'hex';
+  const encoding = (digestType as BinaryToTextEncoding) || 'hex';
   return hash.digest(encoding).substr(0, maxLength);
 };
 
