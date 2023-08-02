@@ -10,23 +10,15 @@
     "strict": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "lib": [
       "esnext"
-    ],
-    "typeRoots": [
-      "./src/types",
-      "./node_modules/@types",
     ],
     "types": [
       "node"
     ],
   },
   "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tasks"
+    "src"
   ]
 }
