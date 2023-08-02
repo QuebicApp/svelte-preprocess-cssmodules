@@ -12,20 +12,18 @@ import {
   normalizeIncludePaths,
 } from './lib';
 
-const defaultOptions = (): PluginOptions => {
-  return {
-    cssVariableHash: '[hash:base64:6]',
-    getLocalIdent,
-    hashSeeder: ['style', 'filepath', 'classname'],
-    includeAttributes: [],
-    includePaths: [],
-    localIdentName: '[local]-[hash:base64:6]',
-    mode: 'native',
-    parseExternalStylesheet: false,
-    parseStyleTag: true,
-    useAsDefaultScoping: false,
-  };
-};
+const defaultOptions = (): PluginOptions => ({
+  cssVariableHash: '[hash:base64:6]',
+  getLocalIdent,
+  hashSeeder: ['style', 'filepath', 'classname'],
+  includeAttributes: [],
+  includePaths: [],
+  localIdentName: '[local]-[hash:base64:6]',
+  mode: 'native',
+  parseExternalStylesheet: false,
+  parseStyleTag: true,
+  useAsDefaultScoping: false,
+});
 
 let pluginOptions: PluginOptions;
 
@@ -124,17 +122,16 @@ const cssModulesPreprocessor = (options: Partial<PluginOptions>): PreprocessorGr
  * @param preprocessors list of preprocessors
  * @returns group of `markup` preprocessors
  */
-const linearPreprocessor = (preprocessors: PreprocessorGroup[]): PreprocessorGroup[] => {
-  return preprocessors.map((p) => {
-    return !p.script && !p.style
+const linearPreprocessor = (preprocessors: PreprocessorGroup[]): PreprocessorGroup[] =>
+  preprocessors.map((p) =>
+    !p.script && !p.style
       ? p
       : {
           async markup({ content, filename }) {
             return preprocess(content, p, { filename });
           },
-        };
-  });
-};
+        }
+  );
 
 // export default cssModulesPreprocessor;
 export default exports = module.exports = cssModulesPreprocessor;

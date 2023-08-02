@@ -54,9 +54,7 @@ export default (processor: Processor): void => {
             )};`;
             processor.magicContent.overwrite(node.start, node.end, specifiers);
           } else {
-            const specifierNames = node.specifiers.map((item: TemplateNode) => {
-              return item.local.name;
-            });
+            const specifierNames = node.specifiers.map((item: TemplateNode) => item.local.name);
             const specifiers = `const { ${specifierNames.join(', ')} } = ${JSON.stringify(
               Object.fromEntries(
                 Object.entries(processor.importedCssModuleList).filter(([key]) =>

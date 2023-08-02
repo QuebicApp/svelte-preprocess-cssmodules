@@ -1,5 +1,5 @@
-import Big from 'big.js';
 import { createHash } from 'crypto';
+import Big from 'big.js';
 
 const baseEncodeTables = {
   26: 'abcdefghijklmnopqrstuvwxyz',

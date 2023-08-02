@@ -7,7 +7,6 @@ module.exports = {
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
     "plugin:import/typescript",
   ],
   parser: '@typescript-eslint/parser',
@@ -25,6 +24,7 @@ module.exports = {
         ignorePackages: true
       }
     ],
+    'import/no-import-module-exports': "off",
     'lines-between-class-members': [
       'error',
       'always',
@@ -32,6 +32,7 @@ module.exports = {
         exceptAfterSingleLine: true
       }
     ],
-    'no-const-assign': 'error'
+    'no-const-assign': 'error',
+    'no-use-before-define': 'off',
   }
 };
